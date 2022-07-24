@@ -27,7 +27,7 @@ h = 01
   <img src ="https://user-images.githubusercontent.com/80566951/180631091-47d2ffe9-7786-4a1d-854e-81d3167880ac.png">
   </div>
 <p align="center">测试截图</p>  
-#### Construct a Merkle tree with 10w leaf nodes
+#### Construct a Merkle tree with 10w leaf nodes  
 按照生成方法，构造大小为10w的Merkle树。该树的深度为17，运行结果如下  
 <div align=center>
     <img src ="https://user-images.githubusercontent.com/80566951/180631091-47d2ffe9-7786-4a1d-854e-81d3167880ac.png">

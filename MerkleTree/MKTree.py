@@ -103,9 +103,6 @@ def Audit_Proof(merkle_tree,h,n,leaf,hash_function = 'sha256'):#h为Merkle树高
 
 merkle_tree,h = Create_Merkle_Tree(lst)
 
-'''print('节点:',', '.join(lst))
-Show_Merkle_Tree(merkle_tree,h)'''
-
 leaf = input('要查找的节点：')
 p = int(input('节点序号：'))
 Audit_Proof(merkle_tree,h,p,leaf)

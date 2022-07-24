@@ -37,7 +37,24 @@ h = 01
   <p align="center">·····</p>
   <img src ="https://user-images.githubusercontent.com/80566951/180631606-201c6c9f-d044-46fe-9ce4-ff9bc0645b63.png">
   </div>
-  
+  <p align="center">10W叶节点测试运行截图</p>
 
+####  Build inclusion proof for specified element & Build exclusion proof for specified element
+即对特定的Merkle树，指定需要查找的节点和相应序号，判断其是否在树中，并给出判断证明。
+##### 1.当查找序号大于叶节点个数报错
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180631849-c2f3ab6b-da81-4b56-a70a-9063432414ce.png">
+  </div>
+<p align="center">节点=根节点</p>
+##### 2.节点=根节点
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180631787-7aee5c38-d711-49a7-9031-0de13dd9070d.png">
+  </div>
+<p align="center">报错</p>
 
+##### 3.节点不在MerkleTree
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180631816-24198ca5-7d87-440e-a957-40ec886533aa.png">
+  </div>
+<p align="center">节点不在MerkleTree</p>
 

@@ -32,9 +32,9 @@ h = 01
  按照生成方法，构造大小为10w的Merkle树。该树的深度为17，运行结果如下  
 <div align=center>
   <img src ="https://user-images.githubusercontent.com/80566951/180631497-ef1c549a-f75f-4ebd-81ab-d5888f466405.png">
-  ·····
+  <p align="center">·····</p>
   <img src = "https://user-images.githubusercontent.com/80566951/180631440-39df00ec-80a7-4276-85d8-8ab7e4637bce.png">
-  ·····
+  <p align="center">·····</p>
   <img src ="https://user-images.githubusercontent.com/80566951/180631497-ef1c549a-f75f-4ebd-81ab-d5888f466405.png">
   </div>
   

@@ -46,6 +46,7 @@ h = 01
   <img src ="https://user-images.githubusercontent.com/80566951/180631849-c2f3ab6b-da81-4b56-a70a-9063432414ce.png">
   </div>
 <p align="center">节点=根节点</p>
+
 ##### 2.节点=根节点
 <div align=center>
   <img src ="https://user-images.githubusercontent.com/80566951/180631787-7aee5c38-d711-49a7-9031-0de13dd9070d.png">

@@ -122,7 +122,7 @@ if __name__ == "__main__":
     signature_forge = (r,s_neg)
     print('(r,-s) 验证:', verify_signature(P, msg, signature_forge))
     
-# (5) 如果验证不检查 m 则可以伪造签名
+# (5) 如果验证不检查 m 则可以伪造签名，即forge a signature to pretend that you are Satoshi
     print('\n(5)如果验证不检查 m 则可以伪造签名:')
     u = random.randrange(1, curve.n)
     v = random.randrange(1, curve.n)

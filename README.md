@@ -1,5 +1,6 @@
 # SDU-201900460045-Sun-Lab
 ## SDU-网络安全创新创业实践课实验
+成员 孙洛鹏 201900460045
 ### 课程实验---实现ECDSA签名算法的伪造
 椭圆曲线算法是基于有限域上椭圆曲线所形成的循环子群上。因此，算法需要以下几个重要参数  
 • 素数p，用于确定有限域的范围  
@@ -35,11 +36,15 @@ def sign_message(private_key, message):
     s = 0
     while not r or not s:
         global k_leak;k_leak = 64373566430140278131327580440284289972164712976330163913406988842791059250706
-        print('k的值:',k_leak)
+        #print('k的值:',k_leak)
         R_x, R_y = scalar_mult(k_leak, curve.g);r = R_x % curve.n;s = ((e + r * private_key) * inverse_mod(k_leak, curve.n)) % curve.n
         #k = random.randrange(1, curve.n)   
         #为保障安全性,k随机生成且不能重复使用.如果泄露k会导致泄露密钥d
     return (r, s) 
+```
+```Tex
+  公式说明：
+  $k\leftarrow Z_{n}^*,R=kG$ 
 ```
 
 

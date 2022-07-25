@@ -93,7 +93,14 @@ def verify_signature(public_key, message, signature):
   </div>
 <p align="center">测试截图</p>
 
-#### Construct a Merkle tree with 10w leaf nodes  
+#### Construct a Merkle tree with 10w leaf nodes
+```python
+测试代码:
+ lst = []
+for i in range(100000):
+    lst.append(str(i))
+merkle_tree,h = Create_Merkle_Tree(lst)
+```
  按照生成方法，构造大小为10w的Merkle树。该树的深度为17，运行结果如下  
 <div align=center>
   <img src ="https://user-images.githubusercontent.com/80566951/180631497-ef1c549a-f75f-4ebd-81ab-d5888f466405.png">

@@ -146,13 +146,34 @@ def verify_signature(public_key, message, signature):
 
 
 #### (3) Two users, using , leads to leaking of d, that is they can deduce each other’s d  
-  Alice使用私钥$d_1$对消息$m_1$进行签名得：$σ_1=(r,s_1) \ \ s_1=k^{-1}(e_1+rd_1)\ mod \ n \ \ e_1=hash(m_1)$  
-  Bob使用私钥$d_2$对消息$m_2$进行签名得：$σ_2=(r,s_2) \ \ -s_2=k^{-1}(e_2+rd_2)\ mod \ n \ \ e_2=hash(m_2)$  
+  Alice使用私钥$d_1$对消息$m_1$进行签名得：$σ_1=(r,s_1)\ \ \ s_1=k^{-1}(e_1+rd_1)\ mod \ n \ \ \  e_1=hash(m_1)$  
+  Bob使用私钥$d_2$对消息$m_2$进行签名得：$σ_2=(r,s_2) \ \ \ -s_2=k^{-1}(e_2+rd_2)\ mod \ n \ \ \  e_2=hash(m_2)$  
   所以有:  
   $k=s_{1}^{-1}(e_1+rd_1)=s_{2}^{-1}(e_2+rd_2) \ mod \ n$  
   $s_1(e_2+rd_2)=s_2(e_1+rd_1) \ mod \ n$  
-  
+  因此Alice可以计算出Bob的密钥$d_2=(s_2e_1-s_1e_2+s_2rd_1)/(s_1r) \ mod \ n$  
+  同理Bob也可以计算出Alice的密钥$d_1=(s_1e_2-s_2e_1+s_1rd_2)/(s_2r) \ mod \ n$  
 
+```python
+测试代码:
+    #Alice恢复Bob的密钥
+    d_guess_Bob = ((s_2*e_1-s_1*e_2+s_2*r_1*d1)*inverse_mod(s_1*r_1,curve.n)) % curve.n
+    print('Alice恢复Bob的私钥:',hex(d_guess_Bob))
+    if d_guess_Bob == d2:print('成功!')
+    else:print('失败.')
+    
+    #Bob恢复Alice的密钥
+    d_guess_Alice = ((s_1*e_2-s_2*e_1+s_1*r_1*d2)*inverse_mod(s_2*r_1,curve.n)) % curve.n
+    print('Bob恢复Alice的私钥:',hex(d_guess_Alice))
+    if d_guess_Alice == d1:print('成功!')
+    else:print('失败.')
+```
+ 测试结果如下:  
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180708681-87297ecc-29d4-4c67-8ecf-70e1f6e2e429.png">
+  </div>
+
+#### (4) Malleability of ECDSA
 
 ### 课程实验---实现MerkleTree
 #### Impl Merkle Tree following RFC6962

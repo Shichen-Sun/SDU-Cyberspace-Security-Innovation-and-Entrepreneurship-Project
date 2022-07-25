@@ -42,9 +42,10 @@ def sign_message(private_key, message):
         #为保障安全性,k随机生成且不能重复使用.如果泄露k会导致泄露密钥d
     return (r, s) 
 ```
+$k\leftarrow Z_{n}^*,R=kG$ 
 ```markdown
 公式说明：
-  $k\leftarrow Z_{n}^*,R=kG$ 
+  
 ```
 
 

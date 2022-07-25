@@ -145,9 +145,12 @@ def verify_signature(public_key, message, signature):
   </div>
 
 
-#### (3) Two users, using , leads to leaking of d, that is they can deduce each other’s d
-  
-  
+#### (3) Two users, using , leads to leaking of d, that is they can deduce each other’s d  
+  Alice使用私钥$d_1$对消息$m_1$进行签名得：$σ_1=(r,s_1) \ \ s_1=k^{-1}(e_1+rd_1)\ mod \ n \ \ e_1=hash(m_1)$  
+  Bob使用私钥$d_2$对消息$m_2$进行签名得：$σ_2=(r,s_2) \ \ -s_2=k^{-1}(e_2+rd_2)\ mod \ n \ \ e_2=hash(m_2)$  
+  所以有:  
+  $k=s_{1}^{-1}(e_1+rd_1)=s_{2}^{-1}(e_2+rd_2) \ mod \ n$  
+  $s_1(e_2+rd_2)=s_2(e_1+rd_1) \ mod \ n$  
   
 
 

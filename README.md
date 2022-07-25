@@ -115,7 +115,40 @@ def verify_signature(public_key, message, signature):
  公式推导过程：  
  $s_{1}=k^{-1}(e_{1}+r_{1}d)\ mod \ n$  
  $s_{2}=k^{-1}(e_{2}+r_{1}d)\ mod \ n$  
- $\frac{s_{1}}{s_{2}}=\frac{e_{1}+r_{1}d}{e_{2}+r_{1}d} \ mod \ n \rightarrow d=\frac{s_{1}e_{2}-s_{2}e_{1}}{s_{2}r_{1}-s_{1}r_{1}} \ mod \ n$  
+ $\frac{s_{1}}{s_{2}}=\frac{e_{1}+r_{1}d}{e_{2}+r_{1}d} \ mod \ n \rightarrow d=\frac{s_{1}e_{2}-s_{2}e_{1}}{s_{2}r_{1}-s_{1}r_{1}} \ mod \ n$    
+  ```python  
+  测试代码:  
+    print('\n(2)重用 k 导致 d 泄漏:')
+    print('重复使用的k = {}'.format(hex(k_leak)))
+    
+    m1 = b'LuoPengSun'
+    
+    m2 = b'ChenYuLiu'
+    signature1 = sign_message(d, m1)
+
+    signature2 = sign_message(d, m2)
+
+    e1 = hash_message(m1);r1 = signature1[0];s1 = signature1[1]
+    e2 = hash_message(m2);r2 = signature2[0];s2 = signature2[1]
+    
+    #根据两条消息及对应的签名恢复私钥
+    d_guess2 = ((s2*e1-s1*e2)*inverse_mod(s1*r1-s2*r1, curve.n)) %curve.n
+    print('猜测密钥d = {0}'.format(hex(d_guess2)))
+    
+    if d_guess2 == d:print('成功!')
+    else:print('失败.')
+  ```
+    
+ 测试结果如下:  
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180707136-d14ba1c6-c762-494e-9cce-3f51e19d85cf.png">
+  </div>
+
+
+#### (3) Two users, using , leads to leaking of d, that is they can deduce each other’s d
+  
+  
+  
 
 
 ### 课程实验---实现MerkleTree

@@ -19,10 +19,10 @@ h = 01
 #### 定义相应参数，定义椭圆曲线相应运算以及签名验签操作
 **模逆运算** 即采用扩展欧几里得算法的方式求模逆  
 **点加** 根据曲线$E(Fp)$上的点，按照相应加法规则，构成一个交换群  
-**是否在曲线上** 根据方程验证点是否在曲线$E(Fp)$上
-**多倍点** 椭圆曲线上同一个点的多次加运算记为该点的多倍点运算
-**公私钥生成** 私钥$d$在${1······n-1}$中任取，公钥$P=dG$
-**签名算法**
+**是否在曲线上** 根据方程验证点是否在曲线$E(Fp)$上  
+**多倍点** 椭圆曲线上同一个点的多次加运算记为该点的多倍点运算  
+**公私钥生成** 私钥$d$在${1······n-1}$中任取，公钥$P=dG$  
+**签名算法**  
 公式说明：   
 $k\leftarrow Z_{n}^*$  
 $R=kG$  
@@ -51,13 +51,31 @@ def sign_message(private_key, message):
 ```
 
  
-**验签算法**
+**验签算法**  
 公式说明：     
 $e=hash(m) $  
 $w=s^{-1}\ mod\ n $   
 $(r',s')=e·wG+r·wP$  
 当$r'=r$时验证通过  
+```python
+代码简述
+def verify_signature(public_key, message, signature):
+    e = hash_message(message)
+    r, s = signature
 
+    w = inverse_mod(s, curve.n)
+    u1 = (e * w) % curve.n
+    u2 = (r * w) % curve.n
+
+    x, y = point_add(scalar_mult(u1, curve.g),
+                     scalar_mult(u2, public_key))
+
+    if (r % curve.n) == (x % curve.n):
+        return '验证通过'
+    else:
+        return '无效签名'
+
+```
 
 
 

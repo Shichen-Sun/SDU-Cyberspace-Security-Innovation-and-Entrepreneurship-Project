@@ -175,8 +175,8 @@ def verify_signature(public_key, message, signature):
 
 
 #### (4) Malleability of ECDSA,e.g. (r,s) and (r,-s) are both valid signatures.  
-我们分析如果$(r,s)$通过验证有:$e·s^_{-1}G+rs^{-1}P=(x,y), \ \ \ r=x \ mod \ p$  
-那么对于$(r,-s)$,则有:$e·(-s)^_{-1}G+r(-s)^{-1}P=(x,-y), \ \ \ r=x \ mod \ p$  
+我们分析如果$(r,s)$通过验证有:$e·s^{-1}G+rs^{-1}P=(x,y), \ \ \ r=x \ mod \ p$  
+那么对于$(r,-s)$,则有:$e·(-s)^{-1}G+r(-s)^{-1}P=(x,-y), \ \ \ r=x \ mod \ p$  
 
 ```python
 测试代码:

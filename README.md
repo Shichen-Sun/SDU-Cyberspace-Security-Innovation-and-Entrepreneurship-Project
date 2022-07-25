@@ -17,12 +17,30 @@ n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
 h = 01 
 #### 定义相应参数，定义椭圆曲线相应运算以及签名验签操作
 **模逆运算** 即采用扩展欧几里得算法的方式求模逆  
-**点加**
-'''python
-代码简述
-'''
+**点加** 根据曲线$E(Fp)$上的点，按照相应加法规则，构成一个交换群  
 **是否在曲线上** 根据方程验证点是否在曲线$E(Fp)$上
+**多倍点** 椭圆曲线上同一个点的多次加运算记为该点的多倍点运算
+**公私钥生成** 私钥$d$在${1······n-1}$中任取，公钥$P=dG$
+**签名算法**
+```python
+代码简述
+  def hash_message(message):
+    message_hash = hashlib.sha256(message).digest()
+    e = int.from_bytes(message_hash, 'big')
+    return e
 
+def sign_message(private_key, message):
+    e = hash_message(message)
+    r = 0
+    s = 0
+    while not r or not s:
+        global k_leak;k_leak = 64373566430140278131327580440284289972164712976330163913406988842791059250706
+        print('k的值:',k_leak)
+        R_x, R_y = scalar_mult(k_leak, curve.g);r = R_x % curve.n;s = ((e + r * private_key) * inverse_mod(k_leak, curve.n)) % curve.n
+        #k = random.randrange(1, curve.n)   
+        #为保障安全性,k随机生成且不能重复使用.如果泄露k会导致泄露密钥d
+    return (r, s) 
+```
 
 
 

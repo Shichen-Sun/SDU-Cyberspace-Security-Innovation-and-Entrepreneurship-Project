@@ -23,6 +23,13 @@ h = 01
 **多倍点** 椭圆曲线上同一个点的多次加运算记为该点的多倍点运算
 **公私钥生成** 私钥$d$在${1······n-1}$中任取，公钥$P=dG$
 **签名算法**
+公式说明：   
+$k\leftarrow Z_{n}^*$  
+$R=kG$  
+$r=R_{x}\ mod\ n, r≠0$  
+$e=hash(m) $  
+$s=k^{-1}(e+dr)mod n$  
+ Sig即为$(r,s)$  
 ```python
 代码简述
   def hash_message(message):
@@ -43,14 +50,13 @@ def sign_message(private_key, message):
     return (r, s) 
 ```
 
-公式说明：   
-$k\leftarrow Z_{n}^*$  
-$R=kG$  
-$r=R_{x} mod n, r≠0$  
+ 
+**验签算法**
+公式说明：     
 $e=hash(m) $  
-$s=k^{-1}(e+dr)mod n$  
- Sig即为$(r,s)$  
-
+$w=s^{-1}\ mod\ n $   
+$(r',s')=e·wG+r·wP$  
+当$r'=r$时验证通过  
 
 
 

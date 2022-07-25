@@ -42,11 +42,14 @@ def sign_message(private_key, message):
         #为保障安全性,k随机生成且不能重复使用.如果泄露k会导致泄露密钥d
     return (r, s) 
 ```
-$k\leftarrow Z_{n}^*,R=kG$ 
-```markdown
 公式说明：
-  
-```
+$k\leftarrow Z_{n}^* \n 
+ R=kG \n
+ r=R_{x} mod n, r≠0 \n
+ e=hash(m) \n
+ s=k^{-1}(e+dr)mod n \n
+ $
+ Sig即为$(r,s)$
 
 
 

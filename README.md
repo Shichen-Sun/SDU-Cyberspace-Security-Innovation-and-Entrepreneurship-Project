@@ -220,6 +220,44 @@ def verify_signature(public_key, message, signature):
   <img src ="https://user-images.githubusercontent.com/80566951/180710232-a6e481bb-8401-4702-bec4-e62bf3a0f086.png">
   </div>
 
+#### (6) Same d and k used in ECDSA & Schnorr signature, leads to leaking of d  
+Schnorr签名过程:  
+(1)使用和上述ECDSA相同的$k,R=kG$  
+(2)$e_2=h(R||m)$  
+(3)$R=kG,s_2=(K+e_2d) \ mod \ n$  
+(4)签名$(R,s_2)$  
+这里令两种签名使用了相同的k和密钥d，则有：  
+$s_1=(e_1+r_1d)(s_2-e_2d)^{-1}\ mod \ n$  
+$d = \frac{s_1s_2-e}{s_1e_2+r_1}\ mod \ n$  
+
+```python
+测试代码:
+    #ECDSA
+    m = b'SDUCyber'
+    e1 = hash_message(m)
+    R_x, R_y = scalar_mult(k, curve.g)#R=kG
+    r1 = R_x % curve.n
+    s1 = ((e1 + r1 * d1) * inverse_mod(k, curve.n)) % curve.n
+
+    #具有相同私钥 d 的 Schnoor 签名
+    R = scalar_mult(k, curve.g)
+    R_x = hex(R_x)[2:]
+    R_y = hex(R_y)[2:]
+    R = R_x+R_y
+    #print(R_x,R_y,R)
+    
+    e2 = hash_message(R.encode('utf-8')+m)
+    s2 = (k+e2*d)%curve.n
+
+    s1 = ((e1 + r1 * d1) * inverse_mod(s2-e2*d1, curve.n)) % curve.n
+    d_guess = (s1*s2-e1)*inverse_mod(s1*e2+r1,curve.n)%curve.n
+    if d_guess == d1:
+        print('成功!')
+```
+ 测试结果如下:  
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180711372-1ffee342-5917-497a-9023-660db101c60e.png">
+  </div>
 
 
 ### 课程实验---实现MerkleTree

@@ -16,7 +16,10 @@ G = 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 4
 n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141  
 h = 01 
 #### 定义相应参数，定义椭圆曲线相应运算以及签名验签操作
-\bm{模逆运算} 
+**模逆运算** 即采用扩展欧几里得算法的方式求模逆  
+**点加** 
+**是否在曲线上** 根据方程验证点是否在曲线$E(Fp)$上
+
 
 
 

@@ -98,11 +98,7 @@ if __name__ == "__main__":
     print('Bob恢复Alice的私钥:',hex(d_guess_Alice))
     if d_guess_Alice == d1:print('成功!')
     else:print('失败.')
-
-
-    d_guess_Bob = ((s_2*e_2-s_1*e_1+s_2*r_1*d1)*inverse_mod(s_1*r_1,curve.n))%curve.n
-    print('')
-
+        
 # (4) (r,s) 和 (r,-s) 都是有效签名
     print('(4) (r,s) 和 (r,-s) 都是有效签名:')
 
@@ -146,7 +142,7 @@ if __name__ == "__main__":
     k = random.randrange(1, curve.n)
 
     #ECDSA
-    m = b'ECDSA'
+    m = b'SDUCyber'
     e1 = hash_message(m)
     R_x, R_y = scalar_mult(k, curve.g)#R=kG
     r1 = R_x % curve.n

@@ -45,11 +45,11 @@ def sign_message(private_key, message):
 
 公式说明：   
 $k\leftarrow Z_{n}^*$  
-$ R=kG \n$
-$ r=R_{x} mod n, r≠0 \n$
- $e=hash(m) \n$
-$ s=k^{-1}(e+dr)mod n \n$
- Sig即为$(r,s)$
+$ R=kG $  
+$ r=R_{x} mod n, r≠0 $  
+ $e=hash(m) $  
+$ s=k^{-1}(e+dr)mod n$  
+ Sig即为$(r,s)$  
 
 
 

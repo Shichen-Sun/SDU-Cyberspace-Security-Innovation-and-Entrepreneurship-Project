@@ -82,10 +82,10 @@ def verify_signature(public_key, message, signature):
 <div align=center>
   <img src ="https://user-images.githubusercontent.com/80566951/180704031-6636f076-f1d0-4961-a583-765d6aa44b83.png">
   </div>
-**下面根据课件所给出的情况，进行相应分析，其中第5条有关编码解码难以实现，其余情况下述一一测试，其中第6条所提出的伪造，即项目中给出的伪造情况:**    
-#### (1) Leaking K leads to leaking of d   
-  通过设置全局变量k_leak模拟k泄露的情况，下面可以通过k和一次签名恢复密钥$d=r^{-1}(kd-e)\ mod \ n$  
-  公式推导如下: 
+**下面根据课件所给出的情况，进行相应分析，其中第5条有关编码解码难以实现，其余情况下述一一测试，其中第6条所提出的伪造，即项目中给出的伪造情况:**  
+ #### (1) Leaking K leads to leaking of d  
+ 通过设置全局变量k_leak模拟k泄露的情况，下面可以通过k和一次签名恢复密钥$d=r^{-1}(kd-e)\ mod \ n$    
+  公式推导如下:  
   $s=k^{-1}(e+dr)\ mod \ n$  
   $ks=e+dr \ mod \ n$  
   $d=r^{-1}(ks-e)\ mod \ n$   
@@ -101,15 +101,16 @@ def verify_signature(public_key, message, signature):
 
     if d_guess == d:print('成功!')
     else:print('失败.')
-  ```
- 测试结果如下:
+  ```  
+  
+ 测试结果如下:  
 <div align=center>
   <img src ="https://user-images.githubusercontent.com/80566951/180704674-ad22ebdd-21a6-4160-af55-cb10b132d9f1.png">
   </div>
 
 #### (2) Reusing K leads to leaking of d  
  即两次签名使用相同的k，使得有r1=r2，那么可以通过两次签名获得的签名$(r_{1},s_{1})(r_{2},s_{2})$求出私钥d  
- 公式推导过程：
+ 公式推导过程：  
  $s_{1}=k^{-1}(e_{1}+r_{1}d)\ mod \ n$  
  $s_{2}=k^{-1}(e_{2}+r_{1}d)\ mod \ n$  
  $\frac{s_{1}}{s_{2}}=\frac{e_{1}+r_{1}d}{e_{2}+r_{1}d} \ mod \ n \rightarrow d=\frac{s_{1}e_{2}-s_{2}e_{1}}{s_{2}r_{1}-s_{1}r_{1}} \ mod \ n$  

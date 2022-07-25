@@ -191,11 +191,34 @@ def verify_signature(public_key, message, signature):
   <img src ="https://user-images.githubusercontent.com/80566951/180709791-2190ad27-b907-4df1-a576-c333c2d1c7d9.png">
   </div>
   
-#### (5) One can forge signature if the verification does not check m （即forge a signature to pretend that you are Satoshi）
+#### (5) One can forge signature if the verification does not check m （即forge a signature to pretend that you are Satoshi）  
+根据给出的推导，完成实验  
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180710085-762acb90-3d3c-461e-890b-e7d5b415c0de.png">
+  </div>
 
-
-  
-
+```python
+测试代码:
+    u = random.randrange(1, curve.n)
+    v = random.randrange(1, curve.n)
+    (x,y) = point_add(scalar_mult(u,curve.g),scalar_mult(v,P))
+    r_ = x%curve.n
+    e_ = r_*u*inverse_mod(v,curve.n)
+    s_ = r_*inverse_mod(v,curve.n)
+    
+    #Check 可以伪造出哈希值为e_的消息签名
+    w = inverse_mod(s_, curve.n)
+    u1 = (e_ * w) % curve.n
+    u2 = (r_ * w) % curve.n
+    (r_forge,s_forge)=point_add(scalar_mult(u1,curve.g),
+                                scalar_mult(u2,P))
+    if r_forge % curve.n == r_:
+        print('成功!')
+```
+ 测试结果如下:  
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180710232-a6e481bb-8401-4702-bec4-e62bf3a0f086.png">
+  </div>
 
 
 

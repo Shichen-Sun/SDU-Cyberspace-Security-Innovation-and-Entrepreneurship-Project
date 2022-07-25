@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print("Private key:", hex(d))
     print("Public key: (0x{:x}, 0x{:x})".format(*P))
 
-    msg = b'How u doing?'
+    msg = b'ChelseaFC Forever'
     signature = sign_message(d, msg)
 
     print()
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     print('\n(2)重用 k 导致 d 泄漏:')
     print('重复使用的k = {}'.format(hex(k_leak)))
     
-    m1 = b'ShiChenSun'
+    m1 = b'LuoPengSun'
     
     m2 = b'ChenYuLiu'
     signature1 = sign_message(d, m1)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     signature_forge = (r,s_neg)
     print('(r,-s) 验证:', verify_signature(P, msg, signature_forge))
     
-# (5) 如果验证不检查 m 则可以伪造签名，即forge a signature to pretend that you are Satoshi
+# (5) 如果验证不检查 m 则可以伪造签名
     print('\n(5)如果验证不检查 m 则可以伪造签名:')
     u = random.randrange(1, curve.n)
     v = random.randrange(1, curve.n)

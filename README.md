@@ -173,7 +173,31 @@ def verify_signature(public_key, message, signature):
   <img src ="https://user-images.githubusercontent.com/80566951/180708681-87297ecc-29d4-4c67-8ecf-70e1f6e2e429.png">
   </div>
 
-#### (4) Malleability of ECDSA
+
+#### (4) Malleability of ECDSA,e.g. (r,s) and (r,-s) are both valid signatures.  
+我们分析如果$(r,s)$通过验证有:$e·s^_{-1}G+rs^{-1}P=(x,y), \ \ \ r=x \ mod \ p$  
+那么对于$(r,-s)$,则有:$e·(-s)^_{-1}G+r(-s)^{-1}P=(x,-y), \ \ \ r=x \ mod \ p$  
+
+```python
+测试代码:
+    r,s = signature
+    s_neg = -s%curve.n
+    #(r,s)通过验证，(r,-s)同样可以
+    signature_forge = (r,s_neg)
+    print('(r,-s) 验证:', verify_signature(P, msg, signature_forge))
+```
+ 测试结果如下:  
+<div align=center>
+  <img src ="https://user-images.githubusercontent.com/80566951/180709791-2190ad27-b907-4df1-a576-c333c2d1c7d9.png">
+  </div>
+  
+#### (5) One can forge signature if the verification does not check m （即forge a signature to pretend that you are Satoshi）
+
+
+  
+
+
+
 
 ### 课程实验---实现MerkleTree
 #### Impl Merkle Tree following RFC6962
